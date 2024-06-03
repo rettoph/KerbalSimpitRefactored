@@ -10,6 +10,7 @@ namespace KerbalSimpit.Core
             // Incoming Messages
             this.Messages.RegisterIncomingType<Synchronisation>(MessageTypeIds.Incoming.Synchronisation, Synchronisation.Deserialize);
             this.Messages.RegisterIncomingType<EchoRequest>(MessageTypeIds.Incoming.EchoRequest, EchoRequest.Deserialize);
+            this.Messages.RegisterIncomingType<ConfigurationDefinition>(MessageTypeIds.Incoming.ConfigurationDefinition);
             this.Messages.RegisterIncomingType<EchoResponse>(MessageTypeIds.Incoming.EchoResponse, EchoResponse.Deserialize);
             this.Messages.RegisterIncomingType<CloseSerialPort>(MessageTypeIds.Incoming.CloseSerialPort);
             this.Messages.RegisterIncomingType<RegisterHandler>(MessageTypeIds.Incoming.RegisterHandler, RegisterHandler.Deserialize);
@@ -20,6 +21,7 @@ namespace KerbalSimpit.Core
             // Outgoing Messages
             this.Messages.RegisterOutogingType<Handshake>(MessageTypeIds.Outgoing.HandshakeMessage);
             this.Messages.RegisterOutogingType<EchoResponse>(MessageTypeIds.Outgoing.EchoResponse, EchoResponse.Serialize);
+            this.Messages.RegisterOutogingType<ConfigurationValue>(MessageTypeIds.Outgoing.ConfigurationValue);
         }
     }
 }

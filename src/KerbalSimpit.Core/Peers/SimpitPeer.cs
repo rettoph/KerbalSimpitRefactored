@@ -22,6 +22,7 @@ namespace KerbalSimpit.Core.Peers
         private readonly SimpitStream _encodeBuffer;
         private readonly SimpitStream _decodeBuffer;
         private readonly ConcurrentDictionary<SimpitMessageType, int> _outgoingSubscriptions;
+        private readonly List<PeerConfiguration> _configurations;
 
         protected ISimpitLogger logger => _simpit.Logger;
         protected CancellationToken cancellationToken => _simpit.CancellationToken;
@@ -45,12 +46,14 @@ namespace KerbalSimpit.Core.Peers
         public event EventHandler<SimpitMessageType> OnOutgoingUnsubscribed;
         public event EventHandler<ISimpitMessage> OnIncomingMessage;
         public event EventHandler<ISimpitMessage> OnOutgoingMessage;
+        public event EventHandler<PeerConfiguration> OnConfigurationAdded;
 
         public SimpitPeer()
         {
             _read = new ConcurrentQueue<ISimpitMessage>();
             _write = new ConcurrentQueue<ISimpitMessage>();
             _outgoingSubscriptions = new ConcurrentDictionary<SimpitMessageType, int>();
+            _configurations = new List<PeerConfiguration>();
 
             _incoming = new SimpitStream();
             _outgoing = new SimpitStream();
@@ -248,6 +251,7 @@ namespace KerbalSimpit.Core.Peers
             _outgoing.Clear();
             _decodeBuffer.Clear();
             _encodeBuffer.Clear();
+            _configurations.Clear();
 
             // Clear any old subscriptions
             while (_outgoingSubscriptions.Count > 0)

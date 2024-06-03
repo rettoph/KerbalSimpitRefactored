@@ -9,14 +9,16 @@ namespace KerbalSimpit.Core
         ISimpitMessageSubscriber<Synchronisation>,
         ISimpitMessageSubscriber<RegisterHandler>,
         ISimpitMessageSubscriber<DeregisterHandler>,
-        ISimpitMessageSubscriber<Request>
+        ISimpitMessageSubscriber<Request>,
+        ISimpitMessageSubscriber<ConfigurationDefinition>
     {
         private void AddCoreSubscriptions()
         {
             this.AddIncomingSubscriber<Synchronisation>(this)
                 .AddIncomingSubscriber<RegisterHandler>(this)
                 .AddIncomingSubscriber<DeregisterHandler>(this)
-                .AddIncomingSubscriber<Request>(this);
+                .AddIncomingSubscriber<Request>(this)
+                .AddIncomingSubscriber<ConfigurationDefinition>(this);
         }
 
         void ISimpitMessageSubscriber<Synchronisation>.Process(SimpitPeer peer, ISimpitMessage<Synchronisation> message)
@@ -64,6 +66,11 @@ namespace KerbalSimpit.Core
 
             _logger.LogDebug("{0}::{1} - message type {2} request recieved on peer {3}.", nameof(Simpit), nameof(ISimpitMessageSubscriber<Synchronisation>.Process), type, peer);
             type.TryEnqueueOutgoingData(peer, this);
+        }
+
+        public void Process(SimpitPeer peer, ISimpitMessage<ConfigurationDefinition> message)
+        {
+            peer.Process(message.Data);
         }
     }
 }
