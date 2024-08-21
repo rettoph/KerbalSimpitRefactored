@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net472;net8</TargetFrameworks>
+    <TargetFrameworkProfile />
+    <AllowUnsafeBlocks>True</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\libraries\SimpitRefactored\src\SimpitRefactored.Common.Core\SimpitRefactored.Common.Core.csproj" />
+    <ProjectReference Include="..\..\libraries\SimpitRefactored\src\SimpitRefactored.Core\SimpitRefactored.Core.csproj" />
+  </ItemGroup>
+
+</Project>

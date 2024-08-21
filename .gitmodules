@@ -4,3 +4,6 @@
 [submodule "libraries/KerbalSimpitRevamped-Arduino"]
 	path = libraries/KerbalSimpitRevamped-Arduino
 	url = https://github.com/rettoph/KerbalSimpitRevamped-Arduino
+[submodule "libraries/SimpitRefactored"]
+	path = libraries/SimpitRefactored
+	url = https://github.com/rettoph/SimpitRefactored
