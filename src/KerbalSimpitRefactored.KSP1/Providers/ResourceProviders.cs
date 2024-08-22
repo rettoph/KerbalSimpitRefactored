@@ -1,5 +1,5 @@
-﻿using KerbalSimpitRefactored.Common.Messages;
-using KerbalSimpitRefactored.Common.Messages.Interfaces;
+﻿using KerbalSimpitRefactored.Common;
+using KerbalSimpitRefactored.Common.Interfaces;
 using SimpitRefactored.Common.Core;
 using SimpitRefactored.Unity.Common.Providers;
 
@@ -34,13 +34,13 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
             }
         }
 
-        public class LiquidFuelProvider : BaseResourceProvider<LiquidFuelDataMessage> { }
-        public class OxidizerProvider : BaseResourceProvider<OxidizerDataMessage> { }
-        public class SolidFuelProvider : BaseResourceProvider<SolidFuelDataMessage> { }
-        public class MonoPropellantProvider : BaseResourceProvider<MonoPropellantDataMessage> { }
-        public class ElectricChargeProvider : BaseResourceProvider<ElectricChargeDataMessage> { }
-        public class OreProvider : BaseResourceProvider<OreDataMessage> { }
-        public class AblatorProvider : BaseResourceProvider<AblatorDataMessage> { }
-        public class XenonGasProvider : BaseResourceProvider<XenonGasDataMessage> { }
+        public class LiquidFuelProvider : BaseResourceProvider<KerbalSimpit.Messages.Data.LiquidFuel> { }
+        public class OxidizerProvider : BaseResourceProvider<KerbalSimpit.Messages.Data.Oxidizer> { }
+        public class SolidFuelProvider : BaseResourceProvider<KerbalSimpit.Messages.Data.SolidFuel> { }
+        public class MonoPropellantProvider : BaseResourceProvider<KerbalSimpit.Messages.Data.MonoPropellant> { }
+        public class ElectricChargeProvider : BaseResourceProvider<KerbalSimpit.Messages.Data.ElectricCharge> { }
+        public class OreProvider : BaseResourceProvider<KerbalSimpit.Messages.Data.Ore> { }
+        public class AblatorProvider : BaseResourceProvider<KerbalSimpit.Messages.Data.Ablator> { }
+        public class XenonGasProvider : BaseResourceProvider<KerbalSimpit.Messages.Data.XenonGas> { }
     }
 }

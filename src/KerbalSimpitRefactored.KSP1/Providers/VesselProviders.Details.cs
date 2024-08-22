@@ -1,14 +1,14 @@
-﻿using KerbalSimpitRefactored.Common.Messages;
-using KerbalSimpitRefactored.Common.Messages.Enums;
+﻿using KerbalSimpitRefactored.Common;
+using KerbalSimpitRefactored.Common.Enums;
 using System;
 
 namespace KerbalSimpitRefactored.Unity.KSP1.Providers
 {
     public static partial class VesselProviders
     {
-        public class ActionGroupsProvider : BaseVesselProvider<ActionGroupsDataMessage>
+        public class ActionGroupsProvider : BaseVesselProvider<KerbalSimpit.Messages.Data.ActionGroups>
         {
-            protected override ActionGroupsDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.ActionGroups GetOutgoingData()
             {
                 ActionGroupFlags flags = ActionGroupFlags.None;
                 if (FlightGlobals.ActiveVessel.ActionGroups[KSPActionGroup.Stage])
@@ -40,16 +40,16 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
                     flags |= ActionGroupFlags.Abort;
                 }
 
-                return new ActionGroupsDataMessage()
+                return new KerbalSimpit.Messages.Data.ActionGroups()
                 {
                     Flags = flags
                 };
             }
         }
 
-        public class DeltaVEnvProvider : BaseVesselProvider<DeltaVEnvDataMessage>
+        public class DeltaVEnvProvider : BaseVesselProvider<KerbalSimpit.Messages.Data.DeltaVEnv>
         {
-            protected override DeltaVEnvDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.DeltaVEnv GetOutgoingData()
             {
                 DeltaVStageInfo currentStageInfo = getCurrentStageDeltaV();
                 if (currentStageInfo == null)
@@ -57,7 +57,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
                     return default;
                 }
 
-                return new DeltaVEnvDataMessage()
+                return new KerbalSimpit.Messages.Data.DeltaVEnv()
                 {
                     StageDeltaVASL = (float)currentStageInfo.deltaVatASL,
                     StageDeltaVVac = (float)currentStageInfo.deltaVinVac,
@@ -67,9 +67,9 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
             }
         }
 
-        public class DeltaVProvider : BaseVesselProvider<DeltaVDataMessage>
+        public class DeltaVProvider : BaseVesselProvider<KerbalSimpit.Messages.Data.DeltaV>
         {
-            protected override DeltaVDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.DeltaV GetOutgoingData()
             {
                 DeltaVStageInfo currentStageInfo = getCurrentStageDeltaV();
                 if (currentStageInfo == null)
@@ -77,7 +77,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
                     return default;
                 }
 
-                return new DeltaVDataMessage()
+                return new KerbalSimpit.Messages.Data.DeltaV()
                 {
                     StageDeltaV = (float)currentStageInfo.deltaVActual,
                     TotalDeltaV = (float)FlightGlobals.ActiveVessel.VesselDeltaV.TotalDeltaVActual
@@ -85,9 +85,9 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
             }
         }
 
-        public class BurnTimeProvider : BaseVesselProvider<BurnTimeDataMessage>
+        public class BurnTimeProvider : BaseVesselProvider<KerbalSimpit.Messages.Data.BurnTime>
         {
-            protected override BurnTimeDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.BurnTime GetOutgoingData()
             {
                 DeltaVStageInfo currentStageInfo = getCurrentStageDeltaV();
                 if (currentStageInfo == null)
@@ -95,7 +95,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
                     return default;
                 }
 
-                return new BurnTimeDataMessage()
+                return new KerbalSimpit.Messages.Data.BurnTime()
                 {
                     StageBurnTime = (float)currentStageInfo.stageBurnTime,
                     TotalBurnTime = (float)FlightGlobals.ActiveVessel.VesselDeltaV.TotalBurnTime
@@ -103,11 +103,11 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
             }
         }
 
-        public class CustomActionGroupsProvider : BaseVesselProvider<CustomActionGroupsDataMessage>
+        public class CustomActionGroupsProvider : BaseVesselProvider<KerbalSimpit.Messages.Data.CustomActionGroups>
         {
-            protected unsafe override CustomActionGroupsDataMessage GetOutgoingData()
+            protected unsafe override KerbalSimpit.Messages.Data.CustomActionGroups GetOutgoingData()
             {
-                CustomActionGroupsDataMessage result = new CustomActionGroupsDataMessage();
+                KerbalSimpit.Messages.Data.CustomActionGroups result = new KerbalSimpit.Messages.Data.CustomActionGroups();
 
                 for (int i = 1; i < this.controller.ActionGroupIDs.Length; i++) //Ignoring 0 since there is no Action Group 0
                 {
@@ -123,9 +123,9 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
             }
         }
 
-        public class TempLimitProvider : BaseVesselProvider<TempLimitDataMessage>
+        public class TempLimitProvider : BaseVesselProvider<KerbalSimpit.Messages.Data.TempLimit>
         {
-            protected override TempLimitDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.TempLimit GetOutgoingData()
             {
                 double maxTempPercentage = 0.0;
                 double maxSkinTempPercentage = 0.0;
@@ -141,7 +141,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
                 if (maxTempPercentage > 255) maxTempPercentage = 255;
                 if (maxSkinTempPercentage > 255) maxSkinTempPercentage = 255;
 
-                return new TempLimitDataMessage()
+                return new KerbalSimpit.Messages.Data.TempLimit()
                 {
                     TempLimitPercentage = (byte)Math.Round(maxTempPercentage),
                     SkinTempLimitPercentage = (byte)Math.Round(maxSkinTempPercentage),

@@ -1,4 +1,4 @@
-﻿using KerbalSimpitRefactored.Common.Messages;
+﻿using KerbalSimpitRefactored.Common;
 using SimpitRefactored.Common.Core.Utilities;
 using SimpitRefactored.Core;
 using SimpitRefactored.Core.Peers;
@@ -7,18 +7,18 @@ using System;
 namespace KerbalSimpitRefactored.Unity.KSP1.Controllers
 {
     public partial class VesselController :
-        ISimpitMessageSubscriber<RotationCommandMessage>,
-        ISimpitMessageSubscriber<TranslationCommandMessage>,
-        ISimpitMessageSubscriber<WheelCommandMessage>,
-        ISimpitMessageSubscriber<CustomAxisCommandMessage>,
-        ISimpitMessageSubscriber<ThrottleCommandMessage>,
-        ISimpitMessageSubscriber<AutopilotModeCommandMessage>
+        ISimpitMessageSubscriber<KerbalSimpit.Messages.Commands.Rotation>,
+        ISimpitMessageSubscriber<KerbalSimpit.Messages.Commands.Translation>,
+        ISimpitMessageSubscriber<KerbalSimpit.Messages.Commands.Wheel>,
+        ISimpitMessageSubscriber<KerbalSimpit.Messages.Commands.CustomAxis>,
+        ISimpitMessageSubscriber<KerbalSimpit.Messages.Commands.Throttle>,
+        ISimpitMessageSubscriber<KerbalSimpit.Messages.Commands.AutopilotMode>
     {
-        private RotationCommandMessage _rotation;
-        private TranslationCommandMessage _translation;
-        private WheelCommandMessage _wheel;
-        private CustomAxisCommandMessage _custom;
-        private ThrottleCommandMessage _throttle;
+        private KerbalSimpit.Messages.Commands.Rotation _rotation;
+        private KerbalSimpit.Messages.Commands.Translation _translation;
+        private KerbalSimpit.Messages.Commands.Wheel _wheel;
+        private KerbalSimpit.Messages.Commands.CustomAxis _custom;
+        private KerbalSimpit.Messages.Commands.Throttle _throttle;
 
         private bool _lastThrottleSentIsZero = true;
         private FlightCtrlState _lastFlightCtrlState = new FlightCtrlState();
@@ -105,7 +105,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Controllers
         }
 
 
-        public void Process(SimpitPeer peer, ISimpitMessage<RotationCommandMessage> message)
+        public void Process(SimpitPeer peer, ISimpitMessage<KerbalSimpit.Messages.Commands.Rotation> message)
         {
             // Bit fields:
             // pitch = 1
@@ -125,7 +125,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Controllers
             }
         }
 
-        public void Process(SimpitPeer peer, ISimpitMessage<TranslationCommandMessage> message)
+        public void Process(SimpitPeer peer, ISimpitMessage<KerbalSimpit.Messages.Commands.Translation> message)
         {
             // Bit fields:
             // X = 1
@@ -145,7 +145,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Controllers
             }
         }
 
-        public void Process(SimpitPeer peer, ISimpitMessage<WheelCommandMessage> message)
+        public void Process(SimpitPeer peer, ISimpitMessage<KerbalSimpit.Messages.Commands.Wheel> message)
         {
             // Bit fields
             // steer = 1
@@ -160,7 +160,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Controllers
             }
         }
 
-        public void Process(SimpitPeer peer, ISimpitMessage<CustomAxisCommandMessage> message)
+        public void Process(SimpitPeer peer, ISimpitMessage<KerbalSimpit.Messages.Commands.CustomAxis> message)
         {
             if ((message.Data.Mask & (byte)1) > 0)
             {
@@ -180,12 +180,12 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Controllers
             }
         }
 
-        public void Process(SimpitPeer peer, ISimpitMessage<ThrottleCommandMessage> message)
+        public void Process(SimpitPeer peer, ISimpitMessage<KerbalSimpit.Messages.Commands.Throttle> message)
         {
             _throttle = message.Data;
         }
 
-        public void Process(SimpitPeer peer, ISimpitMessage<AutopilotModeCommandMessage> message)
+        public void Process(SimpitPeer peer, ISimpitMessage<KerbalSimpit.Messages.Commands.AutopilotMode> message)
         {
             if (_vessel.Autopilot == null)
             {

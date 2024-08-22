@@ -1,6 +1,5 @@
-﻿
-using KerbalSimpitRefactored.Common.Messages;
-using KerbalSimpitRefactored.Common.Messages.Enums;
+﻿using KerbalSimpitRefactored.Common;
+using KerbalSimpitRefactored.Common.Enums;
 using KSP.UI.Screens;
 using SimpitRefactored.Common.Core.Utilities;
 using SimpitRefactored.Core;
@@ -9,14 +8,14 @@ using System.Collections.Generic;
 
 namespace KerbalSimpitRefactored.Unity.KSP1.Controllers
 {
-    public partial class VesselController : ISimpitMessageSubscriber<CustomActionGroupEnableCommandMessage>,
-        ISimpitMessageSubscriber<CustomActionGroupDisableCommandMessage>,
-        ISimpitMessageSubscriber<CustomActionGroupToggleCommandMessage>,
-        ISimpitMessageSubscriber<ActionGroupActivateCommandMessage>,
-        ISimpitMessageSubscriber<ActionGroupDeactivateCommandMessage>,
-        ISimpitMessageSubscriber<ActionGroupToggleCommandMessage>
+    public partial class VesselController : ISimpitMessageSubscriber<KerbalSimpit.Messages.Commands.CustomActionGroupEnable>,
+        ISimpitMessageSubscriber<KerbalSimpit.Messages.Commands.CustomActionGroupDisable>,
+        ISimpitMessageSubscriber<KerbalSimpit.Messages.Commands.CustomActionGroupToggle>,
+        ISimpitMessageSubscriber<KerbalSimpit.Messages.Commands.ActionGroupActivate>,
+        ISimpitMessageSubscriber<KerbalSimpit.Messages.Commands.ActionGroupDeactivate>,
+        ISimpitMessageSubscriber<KerbalSimpit.Messages.Commands.ActionGroupToggle>
     {
-        public void Process(SimpitPeer peer, ISimpitMessage<CustomActionGroupEnableCommandMessage> message)
+        public void Process(SimpitPeer peer, ISimpitMessage<KerbalSimpit.Messages.Commands.CustomActionGroupEnable> message)
         {
             foreach (int idx in message.Data.GroupIds.ToList<byte>())
             {
@@ -24,7 +23,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Controllers
             }
         }
 
-        public void Process(SimpitPeer peer, ISimpitMessage<CustomActionGroupDisableCommandMessage> message)
+        public void Process(SimpitPeer peer, ISimpitMessage<KerbalSimpit.Messages.Commands.CustomActionGroupDisable> message)
         {
             foreach (int idx in message.Data.GroupIds.ToList<byte>())
             {
@@ -32,7 +31,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Controllers
             }
         }
 
-        public void Process(SimpitPeer peer, ISimpitMessage<CustomActionGroupToggleCommandMessage> message)
+        public void Process(SimpitPeer peer, ISimpitMessage<KerbalSimpit.Messages.Commands.CustomActionGroupToggle> message)
         {
             foreach (int idx in message.Data.GroupIds.ToList<byte>())
             {
@@ -45,7 +44,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Controllers
             }
         }
 
-        public void Process(SimpitPeer peer, ISimpitMessage<ActionGroupActivateCommandMessage> message)
+        public void Process(SimpitPeer peer, ISimpitMessage<KerbalSimpit.Messages.Commands.ActionGroupActivate> message)
         {
             foreach (KSPActionGroup group in this.GetActionGroups(message.Data.Flags))
             {
@@ -59,7 +58,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Controllers
             }
         }
 
-        public void Process(SimpitPeer peer, ISimpitMessage<ActionGroupDeactivateCommandMessage> message)
+        public void Process(SimpitPeer peer, ISimpitMessage<KerbalSimpit.Messages.Commands.ActionGroupDeactivate> message)
         {
             foreach (KSPActionGroup group in this.GetActionGroups(message.Data.Flags))
             {
@@ -68,7 +67,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Controllers
             }
         }
 
-        public void Process(SimpitPeer peer, ISimpitMessage<ActionGroupToggleCommandMessage> message)
+        public void Process(SimpitPeer peer, ISimpitMessage<KerbalSimpit.Messages.Commands.ActionGroupToggle> message)
         {
             foreach (KSPActionGroup group in this.GetActionGroups(message.Data.Flags))
             {

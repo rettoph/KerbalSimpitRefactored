@@ -1,6 +1,6 @@
-﻿using KerbalSimpitRefactored.Common.Messages;
-using KerbalSimpitRefactored.Common.Messages.Enums;
-using KerbalSimpitRefactored.Common.Messages.Utilities;
+﻿using KerbalSimpitRefactored.Common;
+using KerbalSimpitRefactored.Common.Enums;
+using KerbalSimpitRefactored.Common.Utilities;
 using KerbalSimpitRefactored.Unity.KSP1.Helpers;
 using System;
 using UnityEngine;
@@ -9,11 +9,11 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
 {
     public static partial class VesselProviders
     {
-        public class AltitudeProvider : BaseVesselProvider<AltitudeDataMessage>
+        public class AltitudeProvider : BaseVesselProvider<KerbalSimpit.Messages.Data.Altitude>
         {
-            protected override AltitudeDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.Altitude GetOutgoingData()
             {
-                return new AltitudeDataMessage()
+                return new KerbalSimpit.Messages.Data.Altitude()
                 {
                     Alt = (float)FlightGlobals.ActiveVessel.altitude,
                     SurfAlt = (float)FlightGlobals.ActiveVessel.radarAltitude
@@ -21,11 +21,11 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
             }
         }
 
-        public class ApsidesProvider : BaseVesselProvider<ApsidesDataMessage>
+        public class ApsidesProvider : BaseVesselProvider<KerbalSimpit.Messages.Data.Apsides>
         {
-            protected override ApsidesDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.Apsides GetOutgoingData()
             {
-                return new ApsidesDataMessage()
+                return new KerbalSimpit.Messages.Data.Apsides()
                 {
                     Apoapsis = (float)FlightGlobals.ActiveVessel.orbit.ApA,
                     Periapsis = (float)FlightGlobals.ActiveVessel.orbit.PeA
@@ -33,11 +33,11 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
             }
         }
 
-        public class ApsidesTimeProvider : BaseVesselProvider<ApsidesTimeDataMessage>
+        public class ApsidesTimeProvider : BaseVesselProvider<KerbalSimpit.Messages.Data.ApsidesTime>
         {
-            protected override ApsidesTimeDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.ApsidesTime GetOutgoingData()
             {
-                return new ApsidesTimeDataMessage()
+                return new KerbalSimpit.Messages.Data.ApsidesTime()
                 {
                     Apoapsis = (int)FlightGlobals.ActiveVessel.orbit.timeToAp,
                     Periapsis = (int)FlightGlobals.ActiveVessel.orbit.timeToPe
@@ -45,11 +45,11 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
             }
         }
 
-        public class VelocityProvider : BaseVesselProvider<VesselVelocityDataMessage>
+        public class VelocityProvider : BaseVesselProvider<KerbalSimpit.Messages.Data.VesselVelocity>
         {
-            protected override VesselVelocityDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.VesselVelocity GetOutgoingData()
             {
-                return new VesselVelocityDataMessage()
+                return new KerbalSimpit.Messages.Data.VesselVelocity()
                 {
                     Orbital = (float)FlightGlobals.ActiveVessel.obt_speed,
                     Surface = (float)FlightGlobals.ActiveVessel.srfSpeed,
@@ -58,9 +58,9 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
             }
         }
 
-        public class RotationProvider : BaseVesselProvider<VesselRotationDataMessage>
+        public class RotationProvider : BaseVesselProvider<KerbalSimpit.Messages.Data.VesselRotation>
         {
-            protected override VesselRotationDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.VesselRotation GetOutgoingData()
             {
                 // Code from KSPIO to compute angles and velocities https://github.com/zitron-git/KSPSerialIO/blob/062d97e892077ea14737f5e79268c0c4d067f5b6/KSPSerialIO/KSPIO.cs#L929-L971
                 Vector3d CoM, north, up, east;
@@ -74,7 +74,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
                 TelemetryHelper.WorldVecToNavHeading(FlightGlobals.ActiveVessel, FlightGlobals.ActiveVessel.srf_velocity.normalized, out float surfaceVelocityHeading, out float surfaceVelocityPitch);
                 TelemetryHelper.WorldVecToNavHeading(FlightGlobals.ActiveVessel, FlightGlobals.ActiveVessel.obt_velocity.normalized, out float orbitalVelocityHeading, out float orbitalVelocityPitch);
 
-                return new VesselRotationDataMessage()
+                return new KerbalSimpit.Messages.Data.VesselRotation()
                 {
                     Roll = (float)((attitude.z > 180) ? (attitude.z - 360.0) : attitude.z),
                     Pitch = (float)((attitude.x > 180) ? (360.0 - attitude.x) : -attitude.x),
@@ -87,11 +87,11 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
             }
         }
 
-        public class OrbitInfoProvider : BaseVesselProvider<OrbitInfoDataMessage>
+        public class OrbitInfoProvider : BaseVesselProvider<KerbalSimpit.Messages.Data.OrbitInfo>
         {
-            protected override OrbitInfoDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.OrbitInfo GetOutgoingData()
             {
-                return new OrbitInfoDataMessage()
+                return new KerbalSimpit.Messages.Data.OrbitInfo()
                 {
                     Eccentricity = (float)FlightGlobals.ActiveVessel.orbit.eccentricity,
                     SemiMajorAxis = (float)FlightGlobals.ActiveVessel.orbit.semiMajorAxis,
@@ -105,11 +105,11 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
             }
         }
 
-        public class AirspeedProvider : BaseVesselProvider<AirSpeedDataMessage>
+        public class AirspeedProvider : BaseVesselProvider<KerbalSimpit.Messages.Data.AirSpeed>
         {
-            protected override AirSpeedDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.AirSpeed GetOutgoingData()
             {
-                return new AirSpeedDataMessage()
+                return new KerbalSimpit.Messages.Data.AirSpeed()
                 {
                     IndicatedAirSpeed = (float)FlightGlobals.ActiveVessel.indicatedAirSpeed,
                     MachNumber = (float)FlightGlobals.ActiveVessel.mach,
@@ -118,11 +118,11 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
             }
         }
 
-        public class ManeuverProvider : BaseVesselProvider<ManeuverDataMessage>
+        public class ManeuverProvider : BaseVesselProvider<KerbalSimpit.Messages.Data.Maneuver>
         {
-            protected override ManeuverDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.Maneuver GetOutgoingData()
             {
-                var maneuver = new ManeuverDataMessage();
+                var maneuver = new KerbalSimpit.Messages.Data.Maneuver();
                 maneuver.TimeToNextManeuver = 0.0f;
                 maneuver.DeltaVNextManeuver = 0.0f;
                 maneuver.DurationNextManeuver = 0.0f;
@@ -167,7 +167,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
             }
         }
 
-        public class SASInfoProvider : BaseVesselProvider<SASDataMessage>
+        public class SASInfoProvider : BaseVesselProvider<KerbalSimpit.Messages.Data.SAS>
         {
             protected override bool ShouldCleanOutgoingData()
             {
@@ -179,9 +179,9 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
                 return FlightGlobals.ActiveVessel.Autopilot != null;
             }
 
-            protected override SASDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.SAS GetOutgoingData()
             {
-                SASDataMessage sasInfo = new SASDataMessage();
+                KerbalSimpit.Messages.Data.SAS sasInfo = new KerbalSimpit.Messages.Data.SAS();
 
                 if (FlightGlobals.ActiveVessel.Autopilot.Enabled)
                 {

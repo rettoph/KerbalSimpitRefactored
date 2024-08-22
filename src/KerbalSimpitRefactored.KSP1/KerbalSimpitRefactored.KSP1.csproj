@@ -105,9 +105,9 @@
       <Project>{8EA8AC50-E572-431F-8169-DC8608084D05}</Project>
       <Name>SimpitRefactored.Unity.Common</Name>
     </ProjectReference>
-    <ProjectReference Include="..\KerbalSimpitRefactored.Common.Messages\KerbalSimpitRefactored.Common.Messages.csproj">
-      <Project>{00d9d8b0-d671-47e7-abde-2a24e84a889e}</Project>
-      <Name>KerbalSimpitRefactored.Common.Messages</Name>
+    <ProjectReference Include="..\KerbalSimpitRefactored.Common\KerbalSimpitRefactored.Common.csproj">
+      <Project>{902f09e0-a1ef-4eca-b9cc-ba16cb3c4b2f}</Project>
+      <Name>KerbalSimpitRefactored.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

@@ -1,14 +1,14 @@
-﻿using KerbalSimpitRefactored.Common.Messages;
+﻿using KerbalSimpitRefactored.Common;
 
 namespace KerbalSimpitRefactored.Unity.KSP1.Providers
 {
     public static partial class VesselProviders
     {
-        public class RotationCommandProvider : BaseVesselProvider<FlightCtrlRotationDataMessage>
+        public class RotationCommandProvider : BaseVesselProvider<KerbalSimpit.Messages.Data.FlightCtrlRotation>
         {
-            protected override FlightCtrlRotationDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.FlightCtrlRotation GetOutgoingData()
             {
-                return new FlightCtrlRotationDataMessage()
+                return new KerbalSimpit.Messages.Data.FlightCtrlRotation()
                 {
                     Pitch = (short)(this.controller.LastFlightCtrlState.pitch * short.MaxValue),
                     Yaw = (short)(this.controller.LastFlightCtrlState.yaw * short.MaxValue),
@@ -17,11 +17,11 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
             }
         }
 
-        public class TranslationCommandProvider : BaseVesselProvider<FlightCtrlTranslationDataMessage>
+        public class TranslationCommandProvider : BaseVesselProvider<KerbalSimpit.Messages.Data.FlightCtrlTranslation>
         {
-            protected override FlightCtrlTranslationDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.FlightCtrlTranslation GetOutgoingData()
             {
-                return new FlightCtrlTranslationDataMessage()
+                return new KerbalSimpit.Messages.Data.FlightCtrlTranslation()
                 {
                     X = (short)(this.controller.LastFlightCtrlState.X * short.MaxValue),
                     Y = (short)(this.controller.LastFlightCtrlState.Y * short.MaxValue),
@@ -30,11 +30,11 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
             }
         }
 
-        public class WheelCommandProvider : BaseVesselProvider<FlightCtrlWheelDataMessage>
+        public class WheelCommandProvider : BaseVesselProvider<KerbalSimpit.Messages.Data.FlightCtrlWheel>
         {
-            protected override FlightCtrlWheelDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.FlightCtrlWheel GetOutgoingData()
             {
-                return new FlightCtrlWheelDataMessage()
+                return new KerbalSimpit.Messages.Data.FlightCtrlWheel()
                 {
                     Steer = (short)(this.controller.LastFlightCtrlState.wheelSteer * short.MaxValue),
                     Throttle = (short)(this.controller.LastFlightCtrlState.wheelThrottle * short.MaxValue)
@@ -42,11 +42,11 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
             }
         }
 
-        public class ThrottleCommandProvider : BaseVesselProvider<FlightCtrlThrottleDataMessage>
+        public class ThrottleCommandProvider : BaseVesselProvider<KerbalSimpit.Messages.Data.FlightCtrlThrottle>
         {
-            protected override FlightCtrlThrottleDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.FlightCtrlThrottle GetOutgoingData()
             {
-                return new FlightCtrlThrottleDataMessage()
+                return new KerbalSimpit.Messages.Data.FlightCtrlThrottle()
                 {
                     Value = (short)(this.controller.LastFlightCtrlState.mainThrottle * short.MaxValue)
                 };

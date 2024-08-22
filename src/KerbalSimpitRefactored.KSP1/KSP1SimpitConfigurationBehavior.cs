@@ -1,4 +1,4 @@
-﻿using KerbalSimpitRefactored.Core.KSP.Extensions;
+﻿using KerbalSimpitRefactored.Common.Extensions;
 using SimpitRefactored.Core;
 using SimpitRefactored.Unity.Common;
 

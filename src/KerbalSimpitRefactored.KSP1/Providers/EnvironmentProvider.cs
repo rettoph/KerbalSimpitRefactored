@@ -1,18 +1,17 @@
-﻿using KerbalSimpitRefactored.Common.Messages;
-using KerbalSimpitRefactored.Common.Messages.Enums;
+﻿using KerbalSimpitRefactored.Common;
+using KerbalSimpitRefactored.Common.Enums;
 using KerbalSimpitRefactored.Unity.KSP1.Helpers;
 using SimpitRefactored.Common.Core.Utilities;
 using SimpitRefactored.Unity.Common;
 using SimpitRefactored.Unity.Common.Providers;
 using System;
 using UnityEngine;
-using static KerbalSimpitRefactored.Common.Messages.SceneChangeDataMessage;
 
 namespace KerbalSimpitRefactored.Unity.KSP1.Providers
 {
     public static class EnvironmentProvider
     {
-        public class TargetInfoProvider : GenericUpdateProvider<TargetDataMessage>
+        public class TargetInfoProvider : GenericUpdateProvider<KerbalSimpit.Messages.Data.Target>
         {
             protected override bool ShouldCleanOutgoingData()
             {
@@ -54,14 +53,14 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
                 return base.ShouldCleanOutgoingData();
             }
 
-            protected override TargetDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.Target GetOutgoingData()
             {
                 Vector3 targetDirection = FlightGlobals.ActiveVessel.targetObject.GetTransform().position - FlightGlobals.ActiveVessel.transform.position;
 
                 TelemetryHelper.WorldVecToNavHeading(FlightGlobals.ActiveVessel, targetDirection, out float heading, out float pitch);
                 TelemetryHelper.WorldVecToNavHeading(FlightGlobals.ActiveVessel, FlightGlobals.ship_tgtVelocity, out float velocityHeading, out float velocityPitch);
 
-                return new TargetDataMessage()
+                return new KerbalSimpit.Messages.Data.Target()
                 {
                     Distance = (float)Vector3.Distance(FlightGlobals.fetch.VesselTarget.GetTransform().position, FlightGlobals.ActiveVessel.transform.position),
                     Velocity = (float)FlightGlobals.ship_tgtVelocity.magnitude,
@@ -73,7 +72,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
             }
         }
 
-        public class SoINameProvider : GenericUpdateProvider<SoIDataMessage>
+        public class SoINameProvider : GenericUpdateProvider<KerbalSimpit.Messages.Data.SoI>
         {
             protected override bool ShouldCleanOutgoingData()
             {
@@ -95,9 +94,9 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
                 return base.ShouldCleanOutgoingData();
             }
 
-            protected override SoIDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.SoI GetOutgoingData()
             {
-                return new SoIDataMessage()
+                return new KerbalSimpit.Messages.Data.SoI()
                 {
                     Name = new FixedString(FlightGlobals.ActiveVessel.orbit.referenceBody.bodyName)
                 };
@@ -111,7 +110,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
             {
                 base.Start();
 
-                this.simpit.SetOutgoingData(new SceneChangeDataMessage()
+                this.simpit.SetOutgoingData(new KerbalSimpit.Messages.Data.SceneChange()
                 {
                     Type = SceneChangeTypeEnum.Flight
                 });
@@ -119,14 +118,14 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
 
             public override void OnDestroy()
             {
-                this.simpit.SetOutgoingData(new SceneChangeDataMessage()
+                this.simpit.SetOutgoingData(new KerbalSimpit.Messages.Data.SceneChange()
                 {
                     Type = SceneChangeTypeEnum.NotFlight
                 });
             }
         }
 
-        public class FlightStatusProvider : GenericUpdateProvider<FlightStatusDataMessage>
+        public class FlightStatusProvider : GenericUpdateProvider<KerbalSimpit.Messages.Data.FlightStatus>
         {
             protected override bool ShouldCleanOutgoingData()
             {
@@ -143,9 +142,9 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
                 return base.ShouldCleanOutgoingData();
             }
 
-            protected override FlightStatusDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.FlightStatus GetOutgoingData()
             {
-                FlightStatusDataMessage flightStatus = new FlightStatusDataMessage();
+                KerbalSimpit.Messages.Data.FlightStatus flightStatus = new KerbalSimpit.Messages.Data.FlightStatus();
                 flightStatus.Status = 0;
 
                 if (HighLogic.LoadedSceneIsFlight) flightStatus.Status |= FlightStatusFlags.IsInFlight;
@@ -191,7 +190,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
             }
         }
 
-        public class AtmoConditionProvider : GenericUpdateProvider<AtmoConditionDataMessage>
+        public class AtmoConditionProvider : GenericUpdateProvider<KerbalSimpit.Messages.Data.AtmoCondition>
         {
             protected override bool ShouldCleanOutgoingData()
             {
@@ -208,9 +207,9 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
                 return base.ShouldCleanOutgoingData();
             }
 
-            protected override AtmoConditionDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.AtmoCondition GetOutgoingData()
             {
-                AtmoConditionDataMessage atmoCondition = new AtmoConditionDataMessage();
+                KerbalSimpit.Messages.Data.AtmoCondition atmoCondition = new KerbalSimpit.Messages.Data.AtmoCondition();
 
                 Vessel vessel = FlightGlobals.ActiveVessel;
                 CelestialBody body = FlightGlobals.ActiveVessel.mainBody;
@@ -234,7 +233,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
             }
         }
 
-        public class VesselNameProvider : GenericUpdateProvider<VesselDataMessage>
+        public class VesselNameProvider : GenericUpdateProvider<KerbalSimpit.Messages.Data.Vessel>
         {
             protected override bool ShouldCleanOutgoingData()
             {
@@ -246,9 +245,9 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
                 return base.ShouldCleanOutgoingData();
             }
 
-            protected override VesselDataMessage GetOutgoingData()
+            protected override KerbalSimpit.Messages.Data.Vessel GetOutgoingData()
             {
-                return new VesselDataMessage()
+                return new KerbalSimpit.Messages.Data.Vessel()
                 {
                     Name = new FixedString(FlightGlobals.ActiveVessel.GetDisplayName())
                 };
@@ -278,7 +277,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
 
             private void VesselDockingHandler(uint data0, uint data1)
             {
-                this.simpit.SetOutgoingData(new VesselChangeDataMessage()
+                this.simpit.SetOutgoingData(new KerbalSimpit.Messages.Data.VesselChange()
                 {
                     Type = VesselChangeTypeEnum.Docking
                 });
@@ -286,7 +285,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
 
             private void VesselUndockingHandler(Vessel data0, Vessel data1)
             {
-                this.simpit.SetOutgoingData(new VesselChangeDataMessage()
+                this.simpit.SetOutgoingData(new KerbalSimpit.Messages.Data.VesselChange()
                 {
                     Type = VesselChangeTypeEnum.Undocking
                 });
@@ -294,7 +293,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
 
             private void VesselSwitchingHandler(Vessel data0, Vessel data1)
             {
-                this.simpit.SetOutgoingData(new VesselChangeDataMessage()
+                this.simpit.SetOutgoingData(new KerbalSimpit.Messages.Data.VesselChange()
                 {
                     Type = VesselChangeTypeEnum.Switching
                 });

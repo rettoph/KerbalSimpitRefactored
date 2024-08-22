@@ -1,5 +1,5 @@
-﻿using KerbalSimpitRefactored.Common.Messages;
-using KerbalSimpitRefactored.Common.Messages.Enums;
+﻿using KerbalSimpitRefactored.Common;
+using KerbalSimpitRefactored.Common.Enums;
 using KerbalSimpitRefactored.Unity.KSP1.Helpers;
 using SimpitRefactored.Common.Core.Utilities;
 using SimpitRefactored.Core;
@@ -12,13 +12,13 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Controllers
 {
     [KSPAddon(KSPAddon.Startup.Flight, false)]
     public class WarpController : SimpitBehaviour,
-        ISimpitMessageSubscriber<WarpChangeCommandMessage>,
-        ISimpitMessageSubscriber<TimewarpToCommandMessage>
+        ISimpitMessageSubscriber<KerbalSimpit.Messages.Commands.WarpChange>,
+        ISimpitMessageSubscriber<KerbalSimpit.Messages.Commands.TimewarpTo>
     {
         private const bool USE_INSTANT_WARP = false;
         private const bool DISPLAY_MESSAGE = false; //When true, each call to Timewarp.SetRate crashes KSP on my computer
 
-        public void Process(SimpitPeer peer, ISimpitMessage<WarpChangeCommandMessage> message)
+        public void Process(SimpitPeer peer, ISimpitMessage<KerbalSimpit.Messages.Commands.WarpChange> message)
         {
             this.logger.LogVerbose("Receveid TW command {0}", message.Data.Rate);
             int currentRate = TimeWarp.CurrentRateIndex;
@@ -84,7 +84,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Controllers
             }
         }
 
-        public void Process(SimpitPeer peer, ISimpitMessage<TimewarpToCommandMessage> message)
+        public void Process(SimpitPeer peer, ISimpitMessage<KerbalSimpit.Messages.Commands.TimewarpTo> message)
         {
             // In those cases, we need to timewarp to a given time. Let's compute this time (UT)
             double timeToWarp = -1;

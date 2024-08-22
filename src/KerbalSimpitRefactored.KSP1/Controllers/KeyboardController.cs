@@ -1,5 +1,5 @@
-﻿using KerbalSimpitRefactored.Common.Messages.Enums;
-using KerbalSimpitRefactored.Core.KSP.Messages;
+﻿using KerbalSimpitRefactored.Common;
+using KerbalSimpitRefactored.Common.Enums;
 using SimpitRefactored.Common.Core.Utilities;
 using SimpitRefactored.Core;
 using SimpitRefactored.Core.Peers;
@@ -11,11 +11,11 @@ namespace SimpitRefactored.Unity.Common.Controllers
 {
     [KSPAddon(KSPAddon.Startup.Flight, false)]
     public class KeyboardController : SimpitBehaviour,
-        ISimpitMessageSubscriber<KeyboardEmulatorCommandMessage>
+        ISimpitMessageSubscriber<KerbalSimpit.Messages.Commands.KeyboardEmulator>
     {
         private InputSimulator _input = new InputSimulator();
 
-        public void Process(SimpitPeer peer, ISimpitMessage<KeyboardEmulatorCommandMessage> message)
+        public void Process(SimpitPeer peer, ISimpitMessage<KerbalSimpit.Messages.Commands.KeyboardEmulator> message)
         {
             try
             {

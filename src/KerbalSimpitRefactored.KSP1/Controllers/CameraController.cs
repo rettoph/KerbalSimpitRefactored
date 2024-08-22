@@ -1,5 +1,5 @@
-﻿using KerbalSimpitRefactored.Common.Messages;
-using KerbalSimpitRefactored.Common.Messages.Enums;
+﻿using KerbalSimpitRefactored.Common;
+using KerbalSimpitRefactored.Common.Enums;
 using SimpitRefactored.Common.Core.Utilities;
 using SimpitRefactored.Core;
 using SimpitRefactored.Core.Peers;
@@ -14,9 +14,9 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Controllers
 {
     [KSPAddon(KSPAddon.Startup.Flight, false)]
     public class CameraController : SimpitBehaviour,
-        ISimpitMessageSubscriber<CameraModeCommandMessage>,
-        ISimpitMessageSubscriber<CameraRotationCommandMessage>,
-        ISimpitMessageSubscriber<CameraTranslationCommandMessage>
+        ISimpitMessageSubscriber<KerbalSimpit.Messages.Commands.CameraMode>,
+        ISimpitMessageSubscriber<KerbalSimpit.Messages.Commands.CameraRotation>,
+        ISimpitMessageSubscriber<KerbalSimpit.Messages.Commands.CameraTranslation>
     {
         private float _flightCameraPitchMultiplier = 0.00002f;
         private float _flightCameraYawMultiplier = 0.00006f;
@@ -27,8 +27,8 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Controllers
         private FieldInfo _ivaYawField;
         private float _ivaCameraMultiplier = 0.003f;
 
-        private CameraRotationCommandMessage _rotation;
-        private CameraTranslationCommandMessage _translation;
+        private KerbalSimpit.Messages.Commands.CameraRotation _rotation;
+        private KerbalSimpit.Messages.Commands.CameraTranslation _translation;
 
         public override void Start()
         {
@@ -46,7 +46,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Controllers
             }
         }
 
-        public void Process(SimpitPeer peer, ISimpitMessage<CameraModeCommandMessage> message)
+        public void Process(SimpitPeer peer, ISimpitMessage<KerbalSimpit.Messages.Commands.CameraMode> message)
         {
             // Switch based on the CameraControlBits values
             switch (message.Data.Value)
@@ -149,7 +149,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Controllers
             } /* End of control mode switch */
         }
 
-        public void Process(SimpitPeer peer, ISimpitMessage<CameraRotationCommandMessage> message)
+        public void Process(SimpitPeer peer, ISimpitMessage<KerbalSimpit.Messages.Commands.CameraRotation> message)
         {
             // Bit fields:
             // pitch = 1
@@ -310,7 +310,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Controllers
             }
         }
 
-        public void Process(SimpitPeer peer, ISimpitMessage<CameraTranslationCommandMessage> message)
+        public void Process(SimpitPeer peer, ISimpitMessage<KerbalSimpit.Messages.Commands.CameraTranslation> message)
         {
             // TODO: Investigate - This appears to be doing nothing?
 
