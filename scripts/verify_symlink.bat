@@ -18,7 +18,7 @@ rem --------------------------------------------
 set PROJECT_DIR=%PROJECT_DIR:"=%
 set OUT_DIR=%OUT_DIR:"=%
 set KSP_DIR=%KSP_DIR:"=%
-set SYMLINK_TARGET=%KSP_DIR%\GameData\KerbalSimpit
+set SYMLINK_TARGET=%KSP_DIR%\GameData\KerbalSimpitRefactored
 
 if not exist "%PROJECT_DIR%" (
 	echo Unable to locate PROJECT_DIR %PROJECT_DIR%

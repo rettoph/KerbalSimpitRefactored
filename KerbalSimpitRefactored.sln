@@ -1,0 +1,70 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "scripts", "scripts", "{8E96EE83-EE67-4250-9E72-FD6FD51C3B53}"
+	ProjectSection(SolutionItems) = preProject
+		scripts\make_release.bat = scripts\make_release.bat
+		scripts\pre_build_simpit.bat = scripts\pre_build_simpit.bat
+		scripts\verify_symlink.bat = scripts\verify_symlink.bat
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AD04774F-734E-4A1A-90AE-EE57FC6F3D5B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libraries", "libraries", "{2C17B2E1-B4C2-4812-980B-0CBCE8F8D287}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SimpitRefactored", "SimpitRefactored", "{ABC1575C-6EBB-4678-AA4A-F38142B6C4C6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpitRefactored.Common.Core", "libraries\SimpitRefactored\src\SimpitRefactored.Common.Core\SimpitRefactored.Common.Core.csproj", "{C817B794-DE44-4C7B-BDAB-48C79B620FD5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpitRefactored.Core", "libraries\SimpitRefactored\src\SimpitRefactored.Core\SimpitRefactored.Core.csproj", "{A2FF76C3-22BC-48A3-8BE8-FD4B7976EE33}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpitRefactored.Unity.Common", "libraries\SimpitRefactored\src\SimpitRefactored.Unity.Common\SimpitRefactored.Unity.Common.csproj", "{8EA8AC50-E572-431F-8169-DC8608084D05}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KerbalSimpitRefactored.KSP1", "src\KerbalSimpitRefactored.KSP1\KerbalSimpitRefactored.KSP1.csproj", "{114F69DA-72DA-4F5C-9453-2A68DA19C301}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KerbalSimpitRefactored.Common", "src\KerbalSimpitRefactored.Common\KerbalSimpitRefactored.Common.csproj", "{902F09E0-A1EF-4ECA-B9CC-BA16CB3C4B2F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C817B794-DE44-4C7B-BDAB-48C79B620FD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C817B794-DE44-4C7B-BDAB-48C79B620FD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C817B794-DE44-4C7B-BDAB-48C79B620FD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C817B794-DE44-4C7B-BDAB-48C79B620FD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2FF76C3-22BC-48A3-8BE8-FD4B7976EE33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2FF76C3-22BC-48A3-8BE8-FD4B7976EE33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2FF76C3-22BC-48A3-8BE8-FD4B7976EE33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2FF76C3-22BC-48A3-8BE8-FD4B7976EE33}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EA8AC50-E572-431F-8169-DC8608084D05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EA8AC50-E572-431F-8169-DC8608084D05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EA8AC50-E572-431F-8169-DC8608084D05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EA8AC50-E572-431F-8169-DC8608084D05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{114F69DA-72DA-4F5C-9453-2A68DA19C301}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{114F69DA-72DA-4F5C-9453-2A68DA19C301}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{114F69DA-72DA-4F5C-9453-2A68DA19C301}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{114F69DA-72DA-4F5C-9453-2A68DA19C301}.Release|Any CPU.Build.0 = Release|Any CPU
+		{902F09E0-A1EF-4ECA-B9CC-BA16CB3C4B2F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{902F09E0-A1EF-4ECA-B9CC-BA16CB3C4B2F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{902F09E0-A1EF-4ECA-B9CC-BA16CB3C4B2F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{902F09E0-A1EF-4ECA-B9CC-BA16CB3C4B2F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ABC1575C-6EBB-4678-AA4A-F38142B6C4C6} = {2C17B2E1-B4C2-4812-980B-0CBCE8F8D287}
+		{C817B794-DE44-4C7B-BDAB-48C79B620FD5} = {ABC1575C-6EBB-4678-AA4A-F38142B6C4C6}
+		{A2FF76C3-22BC-48A3-8BE8-FD4B7976EE33} = {ABC1575C-6EBB-4678-AA4A-F38142B6C4C6}
+		{8EA8AC50-E572-431F-8169-DC8608084D05} = {ABC1575C-6EBB-4678-AA4A-F38142B6C4C6}
+		{114F69DA-72DA-4F5C-9453-2A68DA19C301} = {AD04774F-734E-4A1A-90AE-EE57FC6F3D5B}
+		{902F09E0-A1EF-4ECA-B9CC-BA16CB3C4B2F} = {AD04774F-734E-4A1A-90AE-EE57FC6F3D5B}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6AA82C42-BDA1-4B49-9C6F-1DE87648D6DA}
+	EndGlobalSection
+EndGlobal
