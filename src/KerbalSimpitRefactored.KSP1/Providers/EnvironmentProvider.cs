@@ -113,7 +113,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
                 this.simpit.SetOutgoingData(new KerbalSimpit.Messages.Data.SceneChange()
                 {
                     Type = SceneChangeTypeEnum.Flight
-                });
+                }, true);
             }
 
             public override void OnDestroy()
@@ -121,7 +121,7 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
                 this.simpit.SetOutgoingData(new KerbalSimpit.Messages.Data.SceneChange()
                 {
                     Type = SceneChangeTypeEnum.NotFlight
-                });
+                }, true);
             }
         }
 
@@ -144,8 +144,10 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
 
             protected override KerbalSimpit.Messages.Data.FlightStatus GetOutgoingData()
             {
-                KerbalSimpit.Messages.Data.FlightStatus flightStatus = new KerbalSimpit.Messages.Data.FlightStatus();
-                flightStatus.Status = 0;
+                KerbalSimpit.Messages.Data.FlightStatus flightStatus = new KerbalSimpit.Messages.Data.FlightStatus
+                {
+                    Status = 0
+                };
 
                 if (HighLogic.LoadedSceneIsFlight) flightStatus.Status |= FlightStatusFlags.IsInFlight;
                 if (FlightGlobals.ActiveVessel.isEVA) flightStatus.Status |= FlightStatusFlags.IsEva;
