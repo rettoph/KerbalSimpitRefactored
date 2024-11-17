@@ -12,19 +12,20 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
         {
             private readonly PartResourceDefinition _resource;
 
-            public BaseResourceProvider(string resourceName = null)
-            {
-                if (resourceName == null)
-                {
-                    resourceName = typeof(T).Name;
-                }
+            public virtual string ResourceName { get; } = typeof(T).Name;
 
-                _resource = PartResourceLibrary.Instance.GetDefinition(resourceName);
+            public BaseResourceProvider()
+            {
+                _resource = PartResourceLibrary.Instance.GetDefinition(this.ResourceName);
             }
 
             protected override T GetOutgoingData()
             {
                 T instance = new T();
+                if (FlightGlobals.ActiveVessel == null)
+                {
+                    return instance;
+                }
 
                 FlightGlobals.ActiveVessel.GetConnectedResourceTotals(_resource.id, out double available, out double max);
                 instance.Available = (float)available;
@@ -42,11 +43,26 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
         public class OreProvider : BaseResourceProvider<KerbalSimpit.Messages.Data.Ore> { }
         public class AblatorProvider : BaseResourceProvider<KerbalSimpit.Messages.Data.Ablator> { }
         public class XenonGasProvider : BaseResourceProvider<KerbalSimpit.Messages.Data.XenonGas> { }
-        public class EvaPropellantProvider : BaseResourceProvider<KerbalSimpit.Messages.Data.EvaPropellant>
+        public class EvaPropellantProvider : GenericUpdateProvider<KerbalSimpit.Messages.Data.EvaPropellant>
         {
-            public EvaPropellantProvider() : base("EVA Propellant")
+            protected override KerbalSimpit.Messages.Data.EvaPropellant GetOutgoingData()
             {
+                KerbalSimpit.Messages.Data.EvaPropellant instance = new KerbalSimpit.Messages.Data.EvaPropellant();
 
+                if (FlightGlobals.ActiveVessel == null)
+                {
+                    return instance;
+                }
+
+                if (FlightGlobals.ActiveVessel.isEVA == false || FlightGlobals.ActiveVessel.evaController == null)
+                {
+                    return instance;
+                }
+
+                instance.Available = (float)FlightGlobals.ActiveVessel.evaController.Fuel;
+                instance.Max = (float)FlightGlobals.ActiveVessel.evaController.FuelCapacity;
+
+                return instance;
             }
         }
     }
