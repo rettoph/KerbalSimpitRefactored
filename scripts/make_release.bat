@@ -66,6 +66,7 @@ if not exist %ARDUINOLIB_FOLDER% (
 )
 
 xcopy /q /S %ARDUINOLIB_FOLDER%src %OUTPUT_FOLDER%\KerbalSimpitRefactored-Arduino\src\
+xcopy /q /S %ARDUINOLIB_FOLDER%libraries %OUTPUT_FOLDER%\KerbalSimpitRefactored-Arduino\libraries\
 xcopy /q /S %ARDUINOLIB_FOLDER%examples %OUTPUT_FOLDER%\KerbalSimpitRefactored-Arduino\examples\
 xcopy /q %ARDUINOLIB_FOLDER%keywords.txt %OUTPUT_FOLDER%\KerbalSimpitRefactored-Arduino
 xcopy /q %ARDUINOLIB_FOLDER%library.properties %OUTPUT_FOLDER%\KerbalSimpitRefactored-Arduino
@@ -77,4 +78,5 @@ xcopy /q %ARDUINOLIB_FOLDER%ressource_list.txt %OUTPUT_FOLDER%\KerbalSimpitRefac
 
 
 REM now compress it
-tar -C %ProjectDir%\..\..\releases\KerbalSimpitRefactored-v%MAJOR%.%MINOR%.%PATCH% -acf %ProjectDir%\..\..\releases\KerbalSimpitRefactored-v%MAJOR%.%MINOR%.%PATCH%.zip KerbalSimpit
+echo %ProjectDir%\..\..\releases\KerbalSimpitRefactored-v%MAJOR%.%MINOR%.%PATCH%
+"C:\Program Files\7-Zip\7z.exe" a -tzip %ProjectDir%\..\..\releases\KerbalSimpitRefactored-v%MAJOR%.%MINOR%.%PATCH%.zip %ProjectDir%\..\..\releases\KerbalSimpitRefactored-v%MAJOR%.%MINOR%.%PATCH%\*

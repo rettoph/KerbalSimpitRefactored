@@ -42,5 +42,12 @@ namespace KerbalSimpitRefactored.Unity.KSP1.Providers
         public class OreProvider : BaseResourceProvider<KerbalSimpit.Messages.Data.Ore> { }
         public class AblatorProvider : BaseResourceProvider<KerbalSimpit.Messages.Data.Ablator> { }
         public class XenonGasProvider : BaseResourceProvider<KerbalSimpit.Messages.Data.XenonGas> { }
+        public class EvaPropellantProvider : BaseResourceProvider<KerbalSimpit.Messages.Data.EvaPropellant>
+        {
+            public EvaPropellantProvider() : base("EVA Propellant")
+            {
+
+            }
+        }
     }
 }
